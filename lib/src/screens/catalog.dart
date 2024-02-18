@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:ui_with_provider/src/providers/cart_provider.dart';
 import '../constants/colors.dart';
 import '../models/cat_model.dart';
 
@@ -88,7 +90,7 @@ class _CatalogPageState extends State<CatalogPage> {
                   cats.length,
                   (index) {
                     CatInformation currentCat = cats[index];
-                    return myCatCard(currentCat, width, height);
+                    return myCatCard(context, currentCat);
                   },
                 ),
               ),
@@ -100,7 +102,13 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 }
 
-Widget myCatCard(CatInformation cat, double width, double height) {
+Widget myCatCard(BuildContext context, CatInformation cat) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+
+  CartProvider cartProvider = Provider.of<CartProvider>(context);
+  bool value = cartProvider.cats.contains(cat);
+
   return Container(
     decoration: BoxDecoration(
       color: white,
@@ -140,17 +148,28 @@ Widget myCatCard(CatInformation cat, double width, double height) {
               Text(
                 '\$${cat.price}',
                 style: GoogleFonts.poppins(
-                  fontSize: width * 0.032,
+                  fontSize: width * 0.035,
                   fontWeight: FontWeight.w600,
                   color: theme,
                 ),
               ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  CupertinoIcons.cart_fill,
-                  color: theme,
-                ),
+                onPressed: () {
+                  (value == true)
+                      ? cartProvider.remove(cat)
+                      : cartProvider.add(cat);
+                },
+                icon: (value == true)
+                    ? Icon(
+                        CupertinoIcons.cart_fill_badge_minus,
+                        color: theme,
+                        size: width * 0.065,
+                      )
+                    : Icon(
+                        CupertinoIcons.cart_fill_badge_plus,
+                        color: theme,
+                        size: width * 0.065,
+                      ),
               ),
             ],
           )
