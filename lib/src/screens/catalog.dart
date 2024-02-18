@@ -37,9 +37,9 @@ class _CatalogPageState extends State<CatalogPage> {
                     Gap(height * 0.015),
                     Text(
                       'Store',
-                      style: GoogleFonts.getFont(
-                        'Poppins',
-                        fontSize: 20,
+                      style: GoogleFonts.inter(
+                        fontSize: width * 0.05,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Gap(height * 0.025),
@@ -113,6 +113,14 @@ Widget myCatCard(BuildContext context, CatInformation cat) {
     decoration: BoxDecoration(
       color: white,
       borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0xffDDDDDD),
+          blurRadius: 6.0,
+          spreadRadius: 2.0,
+          offset: Offset(0.0, 0.0),
+        )
+      ],
     ),
     child: Padding(
       padding: EdgeInsets.only(
@@ -121,7 +129,7 @@ Widget myCatCard(BuildContext context, CatInformation cat) {
         top: height * 0.01,
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
@@ -148,7 +156,7 @@ Widget myCatCard(BuildContext context, CatInformation cat) {
               Text(
                 '\$${cat.price}',
                 style: GoogleFonts.poppins(
-                  fontSize: width * 0.035,
+                  fontSize: width * 0.038,
                   fontWeight: FontWeight.w600,
                   color: theme,
                 ),
@@ -163,12 +171,12 @@ Widget myCatCard(BuildContext context, CatInformation cat) {
                     ? Icon(
                         CupertinoIcons.cart_fill_badge_minus,
                         color: theme,
-                        size: width * 0.065,
+                        size: width * 0.068,
                       )
                     : Icon(
                         CupertinoIcons.cart_fill_badge_plus,
                         color: theme,
-                        size: width * 0.065,
+                        size: width * 0.068,
                       ),
               ),
             ],
