@@ -54,6 +54,7 @@ class InformationPage extends StatelessWidget {
               height: height * 0.5,
               color: backgroundGray,
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: 1,
                 itemBuilder: (context, index) {
                   return Padding(

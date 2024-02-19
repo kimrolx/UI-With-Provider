@@ -155,7 +155,7 @@ Widget myCartProducts(
     ),
     child: Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: width * 0.02,
+        horizontal: width * 0.015,
         vertical: height * 0.01,
       ),
       child: Row(
