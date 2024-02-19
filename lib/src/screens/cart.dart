@@ -41,7 +41,6 @@ class CartPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: width * 0.03,
-                      vertical: height * 0.02,
                     ),
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -52,7 +51,11 @@ class CartPage extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                             vertical: height * 0.01,
                           ),
-                          child: myCartProducts(context, cat, provider),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(20),
+                            onTap: () {},
+                            child: myCartProducts(context, cat, provider),
+                          ),
                         );
                       },
                     ),
@@ -64,7 +67,7 @@ class CartPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: width * 0.04,
-                    vertical: height * 0.02,
+                    vertical: height * 0.005,
                   ),
                   child: Column(
                     children: [
@@ -81,7 +84,7 @@ class CartPage extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: width * 0.04,
                               fontWeight: FontWeight.w600,
-                              color: grayFont,
+                              color: grayFont2,
                             ),
                           ),
                           Text(
@@ -135,7 +138,7 @@ Widget myCartProducts(
   double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
 
-  return Container(
+  return Ink(
     width: width * 0.75,
     height: height * 0.15,
     decoration: BoxDecoration(

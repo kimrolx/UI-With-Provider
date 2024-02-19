@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_with_provider/src/providers/cart_provider.dart';
+import 'package:ui_with_provider/src/screens/information.dart';
 import '../constants/colors.dart';
 import '../models/cat_model.dart';
 
@@ -90,7 +91,19 @@ class _CatalogPageState extends State<CatalogPage> {
                   cats.length,
                   (index) {
                     CatInformation currentCat = cats[index];
-                    return myCatCard(context, currentCat);
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InformationPage(currentCat: currentCat),
+                          ),
+                        );
+                      },
+                      child: myCatCard(context, currentCat),
+                    );
                   },
                 ),
               ),
@@ -109,7 +122,7 @@ Widget myCatCard(BuildContext context, CatInformation cat) {
   CartProvider cartProvider = Provider.of<CartProvider>(context);
   bool value = cartProvider.cats.contains(cat);
 
-  return Container(
+  return Ink(
     decoration: BoxDecoration(
       color: white,
       borderRadius: BorderRadius.circular(20),
