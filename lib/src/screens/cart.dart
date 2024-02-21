@@ -159,7 +159,6 @@ Widget myCartProducts(
         vertical: height * 0.01,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
             width: width * 0.35,
@@ -195,6 +194,7 @@ Widget myCartProducts(
               ),
             ],
           ),
+          const Spacer(),
           IconButton(
             onPressed: () {
               provider.remove(cat);

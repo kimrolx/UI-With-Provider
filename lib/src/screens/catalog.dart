@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _CatalogPageState extends State<CatalogPage> {
               backgroundColor: backgroundGray,
               automaticallyImplyLeading: false,
               floating: true,
-              expandedHeight: height * 0.165,
+              expandedHeight: height * 0.17,
               flexibleSpace: FlexibleSpaceBar(
                 background: Column(
                   children: [
@@ -100,29 +101,26 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget buildContent(double width, double height) {
-    return SliverGrid.count(
+    return SliverMasonryGrid.count(
+      crossAxisCount: 2,
       mainAxisSpacing: height * 0.02,
       crossAxisSpacing: width * 0.05,
-      crossAxisCount: 2,
-      childAspectRatio: width / (height * 0.6),
-      children: List.generate(
-        results.length,
-        (index) {
-          CatInformation currentCat = results[index];
-          return InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InformationPage(currentCat: currentCat),
-                ),
-              );
-            },
-            child: myCatCard(context, currentCat),
-          );
-        },
-      ),
+      itemBuilder: (BuildContext context, int index) {
+        CatInformation currentCat = results[index];
+        return InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => InformationPage(currentCat: currentCat),
+              ),
+            );
+          },
+          child: myCatCard(context, currentCat),
+        );
+      },
+      childCount: results.length,
     );
   }
 
@@ -153,7 +151,6 @@ class _CatalogPageState extends State<CatalogPage> {
           top: height * 0.01,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
@@ -167,6 +164,7 @@ class _CatalogPageState extends State<CatalogPage> {
                 ),
               ),
             ),
+            Gap(height * 0.01),
             Text(
               '${cat.catBreed} Cat',
               style: GoogleFonts.poppins(
@@ -237,13 +235,19 @@ class _CatalogPageState extends State<CatalogPage> {
             letterSpacing: 0.5,
             decorationThickness: 6,
           ),
-          prefixIcon: Icon(
-            CupertinoIcons.search,
-            size: width * 0.06,
+          prefixIcon: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              CupertinoIcons.search,
+              size: width * 0.06,
+            ),
           ),
-          suffixIcon: Icon(
-            CupertinoIcons.mic,
-            size: width * 0.06,
+          suffixIcon: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              CupertinoIcons.mic,
+              size: width * 0.06,
+            ),
           ),
         ),
       ),
